@@ -80,6 +80,8 @@ local berserkTimer				= mod:NewBerserkTimer(600)
 local countdownSwellingPride	= mod:NewCountdown(75.5, 144400)
 local countdownReflection		= mod:NewCountdown("Alt25", 144800)
 
+local voicePhaseChange				= mod:NewVoice(nil, nil, DBM_CORE_AUTO_VOICE2_OPTION_TEXT)
+
 mod:AddInfoFrameOption("ej8255")
 mod:AddSetIconOption("SetIconOnMark", 144351, false)
 mod:AddBoolOption("SetIconOnFragment", false)--This does not get along with SetIconOnMark though

@@ -96,6 +96,8 @@ local countdownInfest		= mod:NewCountdown(22.5, 70541)
 local countdownShadowTrap	= mod:NewCountdown(15.5, 73539, nil, nil, nil, nil, true)
 local countdownDefile		= mod:NewCountdown(32.5, 72762, nil, nil, nil, nil, true)
 
+local voicePhaseChange				= mod:NewVoice(nil, nil, DBM_CORE_AUTO_VOICE2_OPTION_TEXT)
+
 mod:AddBoolOption("DefileIcon")
 mod:AddBoolOption("NecroticPlagueIcon")
 mod:AddBoolOption("RagingSpiritIcon", false)

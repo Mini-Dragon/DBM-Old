@@ -93,6 +93,8 @@ local timerFlamesofGalakrond		= mod:NewTargetTimer(15, 147029, nil, mod:IsTank()
 local timerPulsingFlamesCD			= mod:NewNextCountTimer(25, 147042)
 local timerPulsingFlames			= mod:NewBuffActiveTimer(7, 147042)
 
+local voicePhaseChange				= mod:NewVoice(nil, nil, DBM_CORE_AUTO_VOICE2_OPTION_TEXT)
+
 mod:AddSetIconOption("FixateIcon", 147068)
 mod:AddSetIconOption("SetIconOnAdds", "ej8556", false, true)
 

@@ -59,6 +59,8 @@ local timerCastDeafeningRoar		= mod:NewCastTimer(2.3, 64189)
 local timerNextDeafeningRoar		= mod:NewNextTimer(30, 64189)
 local timerAchieve					= mod:NewAchievementTimer(420, 3012, "TimerSpeedKill")
 
+local voicePhaseChange				= mod:NewVoice(nil, nil, DBM_CORE_AUTO_VOICE2_OPTION_TEXT)
+
 mod:AddBoolOption("ShowSaraHealth", false)
 mod:AddBoolOption("SetIconOnFearTarget", true)
 mod:AddBoolOption("SetIconOnFervorTarget", false)

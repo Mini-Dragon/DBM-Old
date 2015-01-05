@@ -91,6 +91,8 @@ local countdownLookWithin				= mod:NewCountdownFades(59, "ej8220")
 local countdownLingeringCorruption		= mod:NewCountdown("Alt15.5", 144514)
 local countdownHurlCorruption			= mod:NewCountdown("Alt20", 144649)
 
+local voicePhaseChange				= mod:NewVoice(nil, nil, DBM_CORE_AUTO_VOICE2_OPTION_TEXT)
+
 --Upvales, don't need variables
 local corruptionLevel = EJ_GetSectionInfo(8252)
 local Ambiguate = Ambiguate

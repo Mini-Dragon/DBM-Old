@@ -95,6 +95,8 @@ local timerEmpoweredChainHealCD		= mod:NewNextSourceTimer(6, 143473)
 local countdownAdds					= mod:NewCountdown(45, "ej7920", not mod:IsHealer())
 local countdownCoolingOff			= mod:NewCountdownFades("Alt15", 143484)
 
+local voiceEarthShield				= mod:NewVoice(143475, mod:IsMagicDispeller())
+
 local berserkTimer					= mod:NewBerserkTimer(600)
 
 mod:AddSetIconOption("SetIconOnAdds", "ej7920", false, true)
@@ -366,6 +368,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 143475 and not args:IsDestTypePlayer() then
 		warnEarthShield:Show(args.destName)
 		specWarnEarthShield:Show(args.destName)
+		voiceEarthShield:Play("ex_so_dun")
 	elseif spellId == 143638 then
 		warnBonecracker:CombinedShow(1.5, args.destName)
 		timerBoneCD:DelayedStart(1.5)--Takes a while to get on all targets. 1.5 seconds in 10 man, not sure about 25 man yet

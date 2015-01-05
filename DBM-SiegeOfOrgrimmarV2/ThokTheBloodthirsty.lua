@@ -93,6 +93,8 @@ local timerScorchingBreath			= mod:NewTargetTimer(30, 143767, nil, mod:IsTank() 
 local timerScorchingBreathCD		= mod:NewCDTimer(11, 143767, nil, mod:IsTank())--Often 12, but sometimes 11
 local timerBurningBloodCD			= mod:NewCDTimer(3.5, 143783, nil, false)--cast often, but someone might want to show it
 
+local voicePhaseChange				= mod:NewVoice(nil, nil, DBM_CORE_AUTO_VOICE2_OPTION_TEXT)
+
 local berserkTimer					= mod:NewBerserkTimer(600)
 
 --mod:AddBoolOption("RangeFrame")

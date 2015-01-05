@@ -28,9 +28,9 @@ local warnSplit							= mod:NewSpellAnnounce(143020, 2, nil, false)--Blizzard on
 local warnReform						= mod:NewSpellAnnounce(143469, 2, nil, false)--These are redundant, but some DO like them for the DBM sound vs blizz one so not completely removed
 local warnSwellingCorruptionCast		= mod:NewSpellAnnounce(143578, 2, 143574)--Heroic (this is the boss spellcast trigger spell NOT personal debuff warning)
 
-local specWarnBreath					= mod:NewSpecialWarningSpell(143436, mod:IsTank())
-local specWarnShaSplash					= mod:NewSpecialWarningMove(143297)
-local specWarnSwirl						= mod:NewSpecialWarningSpell(143309, nil, nil, nil, 2)
+local specWarnBreath					= mod:NewSpecialWarningSpell(143436, mod:IsTank(), nil, nil, nil, nil, true)
+local specWarnShaSplash					= mod:NewSpecialWarningMove(143297, nil, nil, nil, nil, nil, true)
+local specWarnSwirl						= mod:NewSpecialWarningSpell(143309, nil, nil, nil, 2, nil, true)
 local specWarnSwellingCorruptionTarget	= mod:NewSpecialWarningTarget(143578, false)
 local specWarnSwellingCorruptionFades	= mod:NewSpecialWarningFades(143578, false)
 
@@ -41,6 +41,13 @@ local timerSwirlCD						= mod:NewCDTimer(48.5, 143309)
 local timerShaResidue					= mod:NewBuffFadesTimer(10, 143459, nil, false)
 local timerPurifiedResidue				= mod:NewBuffFadesTimer(15, 143524, nil, false)
 local timerSwellingCorruptionCD			= mod:NewCDTimer(75, 143578, nil, nil, nil, 143574)
+
+local voiceBreath						= mod:NewVoice(143436, mod:IsTank())
+local voiceSwirl						= mod:NewVoice(143309)
+local voiceShaSplash					= mod:NewVoice(143297)
+local voiceSwellingCorruption			= mod:NewVoice(143578)
+local voiceReform						= mod:NewVoice(143469)
+local voiceSplit						= mod:NewVoice(143020)
 
 local berserkTimer						= mod:NewBerserkTimer(605)
 
@@ -63,11 +70,13 @@ function mod:SPELL_CAST_START(args)
 		warnBreath:Show()
 		specWarnBreath:Show()
 		timerBreathCD:Start()
+		voiceBreath:Play("ex_so_zbcj")
 	elseif spellId == 143309 then
 		warnSwirl:Show()
 		specWarnSwirl:Show()
 		timerSwirl:Start()
 		timerSwirlCD:Show()
+		voiceSwirl:Play("ex_so_xw")
 	end
 end
 
@@ -79,6 +88,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerPurifiedResidue:Start()
 	elseif spellId == 143297 and args:IsPlayer() and self:AntiSpam(2, 1) then
 		specWarnShaSplash:Show()
+		voiceShaSplash:Play("runaway")
 	elseif spellId == 143574 then
 		specWarnSwellingCorruptionTarget:Show(args.destName)
 	end
@@ -99,6 +109,7 @@ end
 function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, destName, _, _, spellId)
 	if spellId == 143297 and destGUID == UnitGUID("player") and self:AntiSpam(2, 1) then
 		specWarnShaSplash:Show()
+		voiceShaSplash:Play("runaway")
 	end
 end
 mod.SPELL_PERIODIC_MISSED = mod.SPELL_PERIODIC_DAMAGE
@@ -110,6 +121,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 	elseif spellId == 143578 then--Swelling Corruption
 		warnSwellingCorruptionCast:Show()
 		timerSwellingCorruptionCD:Start()
+		voiceSwellingCorruption:Play("ex_so_pz")
 	end
 end
 
@@ -121,11 +133,13 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 		if self:IsMythic() then
 			timerSwellingCorruptionCD:Start(17)
 		end
+		voiceReform:Play("ex_so_fljs")
 	elseif msg:find("spell:143020") then--split
 		warnSplit:Show()
 		timerBreathCD:Cancel()
 		timerSwirlCD:Cancel()
 		timerShaBoltCD:Cancel()
 		timerSwellingCorruptionCD:Cancel()
+		voiceSplit:Play("ex_so_fl")
 	end
 end

@@ -121,6 +121,8 @@ local countdownBombardment			= mod:NewCountdown(55, 147120)
 local countdownBombardmentEnd		= mod:NewCountdownFades("Alt13", 147120)
 local countdownMalice				= mod:NewCountdown("AltTwo30", 147209)
 
+local voicePhaseChange				= mod:NewVoice(nil, nil, DBM_CORE_AUTO_VOICE2_OPTION_TEXT)
+
 local berserkTimer					= mod:NewBerserkTimer(1080)
 
 mod:AddBoolOption("yellMaliceFading", false)
